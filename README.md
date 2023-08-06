@@ -26,3 +26,6 @@ Users may have a limit on the number of comments they can post per content item.
 Smooth Loading: The comment section should provide a smooth user experience by loading comments and new interactions dynamically without the need to refresh the page.
 
 Real-Time Updates: For a more engaging experience, some implementations may include real-time updates, showing new comments as they are posted by other users.
+The Screenshots are:
+https://github.com/GaletiHarish/project-node/assets/123728670/7dfb0212-09ae-4dfd-accc-8d6feced2dd2
+https://github.com/GaletiHarish/project-node/assets/123728670/084b0a5c-1939-46c9-ae7d-78295fa3ba1f
