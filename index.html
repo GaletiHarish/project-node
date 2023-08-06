@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-like Commenting System</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fafafa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .post {
+            border: 1px solid #ccc;
+            margin: 10px auto;
+            max-width: 600px;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post .comments {
+            margin: 10px;
+        }
+
+        .comment {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .comment img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .comment .like-button {
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .comment .likes {
+            margin-left: 10px;
+        }
+
+        .add-comment-btn {
+            margin-top: 10px;
+            cursor: pointer;
+            color: #3897f0;
+        }
+
+        .comment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .comment-modal-content {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-modal textarea {
+            width: 100%;
+            height: 80px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .comment-modal .submit-btn {
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .load-more-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fafafa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        #user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            margin: 5px 0;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        button {
+            background-color: #3897f0;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .post {
+                border: none;
+                margin: 10px;
+            }
+
+            .post img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Instagram-like Commenting System</h1>
+           
+            <div id="user-info">
+                <div id="login-form">
+                    
+                    <button onclick="login()">Logout</button>
+                </div>
+                <div id="signup-form">
+                    <input type="text" id="signup-username" placeholder="Username">
+                    <input type="password" id="signup-password" placeholder="Password">
+                    <button onclick="signup()">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="posts-container"></div>
+
+    <!-- ... The rest of the content remains unchanged ... -->
+
+    <script>
+        // This is a simple example to show the load more, like, and add comment functionality using JavaScript.
+        // In a real-world application, you would fetch comments and likes from the server and handle the logic accordingly.
+
+        // Mock user data (username:password)
+        const users = {
+            user1: 'password1',
+            user2: 'password2',
+        };
+
+        let currentUser = null;
+
+        function login() {
+           
+            window.location.href = 'https://localhost:3000';
+        }
+
+        function signup() {
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (users[username]) {
+                alert('Username already exists. Please choose a different username.');
+            } else {
+                users[username] = password;
+                currentUser = username;
+               
+                document.getElementById('signup-form').style.display = 'none';
+                // Add the logic to show the comments, posts, etc., for the signed-up user.
+            }
+        }
+
+        // ... The rest of the JavaScript logic remains unchanged ...
+    </script>
+
+    <div id="posts-container"></div>
+
+    <div class="load-more-btn" onclick="loadMorePosts()">Load More</div>
+
+    <div class="comment-modal" id="commentModal">
+        <div class="comment-modal-content">
+            <textarea id="commentTextarea" placeholder="Write your comment..."></textarea>
+            <button class="submit-btn" onclick="addComment()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        // This is a simple example to show the load more, like, and add comment functionality using JavaScript.
+        // In a real-world application, you would fetch comments and likes from the server and handle the logic accordingly.
+
+        const postsContainer = document.getElementById('posts-container');
+        const commentsPerPage = 2;
+        let currentPage = 1;
+        const totalComments = 4; // Total number of comments
+
+        // Array of image URLs for each post
+        const imageUrls = [
+            'https://wallpapers.com/images/featured/nature-2ygv7ssy2k0lxlzu.jpg',
+            'https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg',
+            'https://via.placeholder.com/600x400?text=Post+3',
+            'https://via.placeholder.com/600x400?text=Post+4',
+        ];
+
+        function loadMorePosts() {
+            const startIndex = (currentPage - 1) * commentsPerPage;
+            const endIndex = Math.min(startIndex + commentsPerPage, totalComments);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const postId = `post-${i + 1}`;
+                const post = `
+                    <div class="post" id="${postId}">
+                        <img src="${imageUrls[i]}" alt="Post ${i + 1}">
+                        <div class="comments">
+                            <div class="comment">
+                                <img src="user1.jpg" alt="User 1">
+                                <strong>User 1:</strong> Comment ${i + 1}
+                                <div class="like-button" onclick="toggleLike(this)">❤️</div>
+                                <span class="likes">0</span>
+                            </div>
+                            <div class="comment">
+                                <img src="user2.jpg" alt="User 2">
+                                <strong>User 2:</strong> Comment ${i + 2}
+                                <div class="like-button" onclick="toggleLike(this)">❤️</div>
+                                <span class="likes">0</span>
+                            </div>
+                            <div class="add-comment-btn" onclick="showCommentModal('${postId}')">Add Comment</div>
+                        </div>
+                    </div>
+                `;
+                postsContainer.insertAdjacentHTML('beforeend', post);
+            }
+
+            currentPage++;
+
+            if (currentPage > Math.ceil(totalComments / commentsPerPage)) {
+                document.querySelector('.load-more-btn').style.display = 'none';
+            }
+        }
+
+        function toggleLike(likeButton) {
+            const commentDiv = likeButton.parentNode;
+            const likesSpan = commentDiv.querySelector('.likes');
+            const currentLikes = parseInt(likesSpan.textContent, 10);
+            const isLiked = likeButton.classList.contains('liked');
+
+            if (isLiked) {
+                likeButton.classList.remove('liked');
+                likesSpan.textContent = currentLikes - 1;
+            } else {
+                likeButton.classList.add('liked');
+                likesSpan.textContent = currentLikes + 1;
+            }
+        }
+
+        function showCommentModal(postId) {
+            const modal = document.getElementById('commentModal');
+            const commentTextarea = document.getElementById('commentTextarea');
+            commentTextarea.value = ''; // Clear the textarea before showing the modal
+            commentTextarea.dataset.postId = postId; // Store the postId in a data attribute
+            modal.style.display = 'flex';
+        }
+
+        function hideCommentModal() {
+            const modal = document.getElementById('commentModal');
+            modal.style.display = 'none';
+        }
+
+        function addComment() {
+            const commentTextarea = document.getElementById('commentTextarea');
+            const comment = commentTextarea.value.trim();
+            const postId = commentTextarea.dataset.postId;
+
+            if (comment !== '') {
+                const postDiv = document.getElementById(postId);
+                const commentsContainer = postDiv.querySelector('.comments');
+                const newComment = `
+                    <div class="comment">
+                        <img src="user3.jpg" alt="User 3">
+                        <strong>User 3:</strong> ${comment}
+                        <div class="like-button" onclick="toggleLike(this)">❤️</div>
+                        <span class="likes">0</span>
+                    </div>
+                `;
+
+                // Check if the post already has 10 comments
+                if (commentsContainer.children.length >= 10) {
+                    alert('You can only post up to 10 comments per picture.');
+                } else {
+                    commentsContainer.insertAdjacentHTML('beforeend', newComment);
+                    commentTextarea.value = '';
+                    hideCommentModal();
+                }
+            }
+        }
+
+        // Load initial posts on page load
+        loadMorePosts();
+    </script>
+</body>
+</html>
