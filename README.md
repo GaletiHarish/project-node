@@ -1,4 +1,4 @@
-# project-node
+# Instagram-like comment section
 
 The Instagram-like comment section is a feature in a web application that allows users to post comments on various content items, such as images or posts. It replicates the commenting functionality found on Instagram's posts and provides a platform for users to engage, share their thoughts, and interact with each other through comments.
 
